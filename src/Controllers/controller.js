@@ -1,8 +1,17 @@
 const Bookcase = require('../Objects/Bookcase');
 
+/* Instantiates a new bookcase object. This variable is constant so it's value cannot be changed */
 const bookcase = new Bookcase();
 
-async function getBookById(req, res, next) {
+/**
+ * Returns the book specified by the index in the parameters.
+ *
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
+async function getBookByIndex(req, res, next) {
   try {
     const bookIndex = req.params.bookIndex;
     const book = bookcase.getBookByIndex(bookIndex);
@@ -12,6 +21,14 @@ async function getBookById(req, res, next) {
   }
 }
 
+/**
+ * Returns all books by author in the parameters.
+ *
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
 async function getBookByAuthor(req, res, next) {
   try {
     const author = req.params.author;
@@ -22,6 +39,14 @@ async function getBookByAuthor(req, res, next) {
   }
 }
 
+/**
+ * Returns the books with the title from the parameters.
+ *
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
 async function getBookByTitle(req, res, next) {
   try {
     const title = req.params.title;
@@ -32,6 +57,14 @@ async function getBookByTitle(req, res, next) {
   }
 }
 
+/**
+ * Updates the book at the index specified by the parameters with the price from the body of the request.
+ *
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
 async function updateBook(req, res, next) {
   try {
     const bookIndex = req.params.bookIndex;
@@ -43,6 +76,14 @@ async function updateBook(req, res, next) {
   }
 }
 
+/**
+ * Create a new book with the information from the parameters.
+ *
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
 async function createBook(req, res, next) {
   try {
     const book = req.body;
@@ -53,6 +94,14 @@ async function createBook(req, res, next) {
   }
 }
 
+/**
+ * Removes a book from the bookcase.
+ *
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
 async function buyBook(req, res, next) {
   try {
     const bookIndex = req.params.bookIndex;
@@ -63,6 +112,13 @@ async function buyBook(req, res, next) {
   }
 }
 
+/**
+ * Returns all the books from the bookcase.
+ * @param req - the request
+ * @param res - the response
+ * @param next - the next middleware
+ * @returns {Promise<void>}
+ */
 async function getAllBooks(req, res, next) {
   try{
     const books = bookcase.viewBooks();
@@ -72,7 +128,8 @@ async function getAllBooks(req, res, next) {
   }
 }
 
-module.exports.getBookById = getBookById;
+/* Each function could be imported separately or all together. They must be accessed by their name when imported. */
+module.exports.getBookByIndex = getBookByIndex;
 module.exports.getBookByAuthor = getBookByAuthor;
 module.exports.getBookByTitle = getBookByTitle;
 module.exports.updateBook = updateBook;

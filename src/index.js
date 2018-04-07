@@ -5,7 +5,7 @@ const routes = require('./Routes/routes');
 
 const app = express();
 
-/* These are universal middlewares essentially.  They run before the routes are computed. */
+/* These are application-level middleware.  They run before the routes are computed. */
 app.use(morgan('dev')); // provides logging for each of the endpoints in the terminal
 app.use(bodyParser.json()); // nicely formats the request as a json object
 app.use(bodyParser.urlencoded({ extended: false })); // parses only UTF-8, url-encoded requests
@@ -24,7 +24,7 @@ app.use((req, res) => {
 
 /*
  * This handles any errors thrown but not handled by the routes. If the error already has a status
- * code, use that, otherwise, it will be a 500, Internal Server Error.
+ * code, use that, otherwise, it will be a 500, Internal Server Error. Error handling middleware
  */
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
